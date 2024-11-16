@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./Include/css/style.css" />
+    <title>Registration Form</title>
+  </head>
+  <body>
+    <div class="container">
+      <div class="registration-form" id="regForm">
+        <form action="" name="theform" id="form-data">
+          <header>
+            <h1>Signup</h1>
+          </header>
+          <section class="info-section form-body">
+            <label>
+              <span>Full Name </span>
+              <input
+                type="text"
+                name="name"
+                id="name"
+                placeholder="Enter your name"
+              />
+              <p>Name must be and e.g. Ratan Tata</p>
+            </label>
+            <label>
+              <span>Username</span>
+              <input
+                type="text"
+                name="username"
+                id="username"
+                placeholder="Enter your username"
+              />
+              <p>Username must be and contain 5 - 12 characters</p>
+            </label>
+            <label>
+              <span>Email</span>
+              <input
+                type="email"
+                name="email"
+                id="email"
+                placeholder="Enter your email"
+              />
+              <p>Email must be a valid address, e.g. me@mydomain.com</p>
+            </label>
+            <label>
+              <span> Phone Number </span>
+              <input
+                type="text"
+                name="phone"
+                id="phone"
+                placeholder="Enter your phone number"
+              />
+              <p>Phone number must be a valid phone number (10 digits)</p>
+            </label>
+            <label>
+              <span>Password</span>
+              <input
+                type="password"
+                name="password"
+                id="password"
+                placeholder="Enter your password"
+              />
+              <p>
+                Password must alphanumeric (@, _ and - are also allowed) and be
+                8 - 20 characters
+              </p>
+            </label>
+            <label>
+              <span>Confirm Password</span>
+              <input
+                type="password"
+                name="cnfrpassword"
+                id="cnfrpassword"
+                placeholder="Enter confirm password"
+                onkeyup="check(this)"
+              />
+              <p>Confirm password must be same password</p>
+            </label>
+          </section>
+          <section class="gender-section">
+            <h3>Gender</h3>
+            <div class="gender">
+              <label>
+                <input type="radio" name="gender" id="male" value="Male" />
+                <span>Male</span>
+              </label>
+              <label>
+                <input type="radio" name="gender" id="female" value="Female" />
+                <span>Female</span>
+              </label>
+              <label>
+                <input
+                  type="radio"
+                  name="gender"
+                  id="prfnot"
+                  value="Not to say"
+                />
+                <span>Prefer not to say</span>
+              </label>
+              <p>gender must be select</p>
+            </div>
+            <button type="button" id="btn" onclick="registration()">
+              Registration
+            </button>
+          </section>
+        </form>
+      </div>
+    </div>
+    <div id="show-data">
+      <table id="table">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>User Name</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>Gender</th>
+          </tr>
+        </thead>
+      </table>
+    </div>
+    <button typebutton id="showbtn">
+      <span id="textElement"> Show Data</span>
+    </button>
+    <!-- <button typebutton id="hidebtn" onclick="hidebtn()">Hide Data</button> -->
+  </body>
+  <script src="./Include/JS/script.js"></script>
+</html>

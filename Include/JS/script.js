@@ -7,6 +7,7 @@ const form = document.forms[theform];
 let showData = document.getElementById("show-data");
 let regForm = document.getElementById("regForm");
 let switchBtn = document.getElementById("showbtn");
+let submitForm = document.getElementById("form-data");
 
 const patterns = {
   name: /[a-zA-Z\sa-zA-Z]{4,20}/,
@@ -19,15 +20,20 @@ const patterns = {
 function validate(field, regex) {
   if (regex.test(field.value)) {
     field.className = "valid";
-    // btn.style.display = "block";
+    return true;
   } else {
     field.className = "invalid";
+    return false;
   }
 }
 
 inputs.forEach((input) => {
   input.addEventListener("keyup", (e) => {
-    validate(e.target, patterns[e.target.attributes.name.value]);
+    const regExKey = e.target.dataset.regex;
+    const regex = patterns[regExKey];
+    if (regex) {
+      validate(e.target, regex);
+    }
   });
 });
 
@@ -42,7 +48,7 @@ function check(elem) {
 }
 
 function registration() {
-  showbtn.style.display = "block";
+  showData.style.display = "block";
 
   let name = document.getElementById("name").value;
   let userName = document.getElementById("username").value;
@@ -51,7 +57,6 @@ function registration() {
 
   let form = document.getElementById("form-data");
   let gender = form.elements["gender"].value;
-  console.log(gender);
 
   // Create a new row and cells
   let table = document.getElementById("table");
@@ -83,3 +88,22 @@ showbtn.addEventListener("click", () => {
     textElement.innerText = "Show Data";
   }
 });
+submitForm.addEventListener("submit", function (event) {
+  event.preventDefault();
+  validateInputs();
+  registration();
+});
+function validateInputs() {
+  let allValid = true;
+  inputs.forEach((input) => {
+    if (!input.value.trim()) {
+      allValid = false;
+    } else if (!input.checkValidity()) {
+      allValid = false;
+    } else {
+    }
+  });
+  if (allValid) {
+    submitForm.submit();
+  }
+}

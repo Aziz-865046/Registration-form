@@ -19,6 +19,7 @@
               <input
                 type="text"
                 name="name"
+                data-regex="name"
                 id="name"
                 placeholder="Enter your name"
               />
@@ -29,6 +30,7 @@
               <input
                 type="text"
                 name="username"
+                data-regex="username"
                 id="username"
                 placeholder="Enter your username"
               />
@@ -39,6 +41,7 @@
               <input
                 type="email"
                 name="email"
+                data-regex="email"
                 id="email"
                 placeholder="Enter your email"
               />
@@ -49,6 +52,7 @@
               <input
                 type="text"
                 name="phone"
+                data-regex="phone"
                 id="phone"
                 placeholder="Enter your phone number"
               />
@@ -58,6 +62,7 @@
               <span>Password</span>
               <input
                 type="password"
+                data-regex="password"
                 name="password"
                 id="password"
                 placeholder="Enter your password"
@@ -71,6 +76,7 @@
               <span>Confirm Password</span>
               <input
                 type="password"
+                data-regex="password"
                 name="cnfrpassword"
                 id="cnfrpassword"
                 placeholder="Enter confirm password"
@@ -101,9 +107,8 @@
               </label>
               <p>gender must be select</p>
             </div>
-            <button type="button" id="btn" onclick="registration()">
-              Registration
-            </button>
+            <!-- <button type="submit" id="btn" onclick="registration()"> -->
+            <button type="submit" id="btn">Registration</button>
           </section>
         </form>
       </div>
@@ -124,7 +129,6 @@
     <button typebutton id="showbtn">
       <span id="textElement"> Show Data</span>
     </button>
-    <!-- <button typebutton id="hidebtn" onclick="hidebtn()">Hide Data</button> -->
   </body>
   <script src="./Include/JS/script.js"></script>
 </html>

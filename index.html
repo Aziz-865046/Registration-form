@@ -89,11 +89,23 @@
             <h3>Gender</h3>
             <div class="gender">
               <label>
-                <input type="radio" name="gender" id="male" value="Male" />
+                <input
+                  type="radio"
+                  name="gender"
+                  id="male"
+                  value="Male"
+                  class="genderitem"
+                />
                 <span>Male</span>
               </label>
               <label>
-                <input type="radio" name="gender" id="female" value="Female" />
+                <input
+                  type="radio"
+                  name="gender"
+                  id="female"
+                  value="Female"
+                  class="genderitem"
+                />
                 <span>Female</span>
               </label>
               <label>
@@ -102,10 +114,11 @@
                   name="gender"
                   id="prfnot"
                   value="Not to say"
+                  class="genderitem"
                 />
                 <span>Prefer not to say</span>
               </label>
-              <p>gender must be select</p>
+              <p id="genderError">gender must be select</p>
             </div>
             <!-- <button type="submit" id="btn" onclick="registration()"> -->
             <button type="submit" id="btn">Registration</button>

@@ -30,7 +30,7 @@ body {
   padding-right: 1rem;
   display: grid;
   grid-template-columns: 1fr 1fr;
-  row-gap: 1rem;
+  row-gap: 1.4rem;
   column-gap: 2rem;
 }
 .form-body span {
@@ -49,7 +49,7 @@ body {
   color: red;
 }
 .gender-section {
-  margin-top: 1rem;
+  margin-top: 1.2rem;
 }
 .gender {
   margin-top: 0.3rem;
@@ -80,19 +80,20 @@ body {
 }
 input.valid {
   border-color: #0e600e;
-  background-color: #36cc3662;
+  background-color: #e8f0fe;
   color: rgb(20, 19, 19);
 }
 input.invalid {
   border-color: orange;
 }
 .registration-form p {
-  text-align: center;
+  text-align: left;
   opacity: 0;
   height: 0;
 }
 input.invalid + p {
   opacity: 1;
+  line-height: 1;
 }
 #btn.invalidform {
   display: none;
@@ -149,4 +150,8 @@ input.invalid + p {
   #show-data {
     width: 100vw;
   }
+}
+#genderError {
+  display: inline-block;
+  color: red;
 }

@@ -25,7 +25,9 @@ const patterns = {
     /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.([a-zA-Z]{2,8})(\.[a-zA-Z]{2,8})?$/,
   phone: /^\d{10}$/,
   password: /^[\w@-]{8,20}$/,
-  cnfrpassword: /^[\w@-]{8,20}$/,
+  // cnfrpassword: /^[\w@-]{8,20}$/,
+  gender: /[male]?[female]?[other]?/,
+  // gender: genderCheck(),
 };
 
 function validate(field, regex) {
@@ -82,7 +84,6 @@ function registration() {
   sessionStorage.setItem("username", userName);
   sessionStorage.setItem("email", email);
   sessionStorage.setItem("gender", gender);
-  // sessionStorage.setItem("a", "b");
   // Add values to the cells
   nameCell.textContent = name;
   usernameCell.textContent = userName;
@@ -90,98 +91,106 @@ function registration() {
   phoneCell.textContent = phone;
   genderCell.textContent = gender;
 }
-showbtn.addEventListener("click", () => {
-  console.log("click button");
-  let textElement = document.getElementById("textElement");
-  if (showbtn.innerText === "Show Data") {
-    textElement.innerText = "Hide Data";
-    showData.style.display = "block";
-    regForm.style.display = "none";
-  } else {
-    showData.style.display = "none";
-    regForm.style.display = "block";
-    textElement.innerText = "Show Data";
-  }
-});
+// showbtn.addEventListener("click", () => {
+//   console.log("click button");
+//   let textElement = document.getElementById("textElement");
+//   if (showbtn.innerText === "Show Data") {
+//     textElement.innerText = "Hide Data";
+//     showData.style.display = "block";
+//     regForm.style.display = "none";
+//   } else {
+//     showData.style.display = "none";
+//     regForm.style.display = "block";
+//     textElement.innerText = "Show Data";
+//   }
+// });
 submitForm.addEventListener("submit", function (event) {
   event.preventDefault();
   console.log("submit");
-  // if (validateInputs()) {
-  // genderCheck();
+  genderCheck();
   if (validInputs()) {
-    registration();
+    // registration();
     console.log("hello");
     // submitForm.submit();
   }
 });
-// function validateInputs() {
-//   let allValid = true;
-//   // registration();
-//   let gender = submitForm.elements["gender"].value;
-//   inputs.forEach((input) => {
-//     if (!input.value.trim() || !gender) {
-//       allValid = false;
-//     } else if (checkValidity()) {
-//       console.log(!input.checkValidity());
-//     } else {
-//     }
-//   });
-//   console.log(allValid);
-//   if (allValid) {
-//     //   submitForm.submit();
-//     return true;
-//   }
-// }
-
+//
 function checkValidity() {
   if (patterns.name.test(fname.value)) {
     return (allValid = false);
   }
 }
 // isFormValid(email);
-function isFormValid(e) {
-  console.log(e);
-
+function testpattern(e, value) {
   const reg = patterns[e];
   console.log(reg);
-
-  return reg.test(e);
+  return reg.test(value);
 }
+
 function validInputs() {
-  let allValid = true;
-
-  console.log("submit");
+  // let allValid = true;
+  registration();
+  sttorage();
   inputs.forEach((input) => {
-    // console.log(input);
-    if (input.value.trim() == "") {
-      // console.log(input.value);
-      allValid = false;
+    console.log("form erro check");
+    console.log("data : " + input.dataset.regex);
 
-      console.log("error");
-    } else if (isFormValid(input.id)) {
-      allValid = true;
-      console.log(input.value);
-      console.log("sucess");
-    } else {
-      console.log(input.value);
-      allValid = false;
-      console.log("return errors");
-    }
+    // console.log(isFormValid(in));
+    // console.log(isFormValid(input.id));
+    console.log(isFormValid(input.dataset.regex, input.value));
+    // if (input.value.trim() == "") {
+    //   // allValid = false;
+
+    //   console.log("error");
+    //   // } else if (isFormValid(input.id)) {
+    // } else if (isFormValid(input.dataset.regex)) {
+    //   // allValid = true;
+    //   console.log(input.value);
+    //   console.log("sucess");
+    // } else {
+    //   console.log(input.value);
+    //   // allValid = false;
+    //   console.log("return errors");
+    // }
   });
+  if (allValid) {
+    //   submitForm.submit();
+    console.log("sumbim form");
+    return true;
+  }
 }
-// console.log(document.getElementById("form-data").querySelectorAll("input"));
 function genderCheck() {
   const male = document.getElementById("male");
   const female = document.getElementById("female");
   const other = document.getElementById("prfnot");
   const error = document.getElementById("genderError");
   if (!male.checked && !female.checked && !other.checked) {
-    console.log("error");
     error.style.opacity = "1";
   } else if (male.checked || female.checked || other.checked) {
     error.style.opacity = "0";
-    console.log("one select");
-  } else {
-    alert("Valid Input :-)");
   }
+}
+function sttorage() {
+  const arr = [];
+  const arr2 = [];
+  for (let input of inputs) {
+    arr.push(input.value);
+    arr2.push(input.id);
+  }
+  arr2.push("gen");
+  console.log(arr2);
+  for (let i = 0; i < arr.length + 1; i++) {
+    localStorage.setItem(arr2[i], arr[i]);
+
+    console.log(arr2[i] + " : " + arr[i]);
+  }
+  arr.push(submitForm.elements["gender"].value);
+  console.log(arr2);
+  console.log(arr);
+  console.log(arr[0]);
+  console.log(arr[1]);
+  console.log(arr[2]);
+  console.log(arr[3]);
+  console.log(arr[3]);
+  console.log(arr[9]);
 }

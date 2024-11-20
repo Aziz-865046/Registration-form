@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <main>
+      <h1>let's check your data is correct</h1>
+      <div id="data"></div>
+      <button id="btn">Confirm</button>
+    </main>
+    <script>
+      const json = localStorage.getItem("form");
+      const obj = JSON.parse(json);
+      console.log(obj);
+      console.log(obj.name + " : name   ");
+
+      for (key in obj) {
+        const markup = `<div>
+                <span>${key}:${obj[key]} </span></div>`;
+        document.getElementById("data").innerHTML += markup;
+      }
+    </script>
+  </body>
+</html>

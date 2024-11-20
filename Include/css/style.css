@@ -155,3 +155,6 @@ input.invalid + p {
   display: inline-block;
   color: red;
 }
+#increment {
+  opacity: 0;
+}

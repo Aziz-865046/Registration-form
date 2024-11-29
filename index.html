@@ -128,26 +128,31 @@
           </section>
         </form>
       </div>
-    </div>
-    <div id="show-data">
-      <table id="table">
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>User Name</th>
-            <th>Email</th>
-            <th>Phone</th>
-            <th>Gender</th>
-          </tr>
-        </thead>
-        <tbody></tbody>
-      </table>
-    </div>
-    <button typebutton id="showbtn">
+      <div id="show-data">
+        <button id="searchbtn">
+          <input type="text" id="search" placeholder="Search by name" />
+          Search
+        </button>
+        <button id="delete-data">X</button>
+
+        <table id="table">
+          <thead>
+            <tr>
+              <th><input type="checkbox" id="allCheck" /></th>
+              <th>Name</th>
+              <th>User Name</th>
+              <th>Email</th>
+              <th>Phone</th>
+              <th>Gender</th>
+            </tr>
+          </thead>
+          <tbody id="tbody"></tbody>
+        </table>
+      </div>
+      <!-- <button typebutton id="showbtn">
       <span id="textElement"> Show Data</span>
-    </button>
-    <!-- <input type="text" id="increment" value="0" /> -->
-    <!-- <textarea value="0" id="increment"></textarea> -->
+    </button> -->
+    </div>
   </body>
   <script src="./Include/JS/script.js"></script>
 </html>

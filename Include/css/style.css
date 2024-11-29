@@ -11,16 +11,21 @@ body {
   background-repeat: no-repeat;
 }
 .container {
-  position: relative;
-  width: 100vw;
-  height: 100vh;
+  width: 98vw;
 }
-.registration-form {
+/* .registration-form {
   box-sizing: border-box;
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  width: 50%;
+  background: rgba(255, 255, 255, 0.664);
+  padding: 2rem;
+} */
+.registration-form {
+  box-sizing: border-box;
+  margin: 5rem auto;
   width: 50%;
   background: rgba(255, 255, 255, 0.664);
   padding: 2rem;
@@ -119,15 +124,20 @@ input.invalid + p {
 }
 
 #show-data {
+  /* display: none; */
   box-sizing: border-box;
-  position: absolute;
-  /* top: 50%; */
-  left: 50%;
-  transform: translatex(-50%);
   width: 50%;
+  /* position: fixed; */
+  /* position: absolute; */
+  /* position: relative; */
+  /* top: 50%; */
+  /* bottom: 0; */
+  /* left: 50%; */
+  /* transform: translatex(-50%); */
   background: rgba(255, 255, 255, 0.664);
   padding: 2rem;
-  display: none;
+  margin: 2rem auto;
+  /* display: none; */
 }
 #table {
   background-color: #fff;
@@ -157,4 +167,20 @@ input.invalid + p {
 }
 #increment {
   opacity: 0;
+}
+#searchbtn {
+  text-align: center;
+  margin: 0.5rem 0;
+  font-size: 1rem;
+  padding: 0.1rem;
+}
+#searchbtn input {
+  /* text-align: center; */
+  padding: 0.1rem 0.5rem;
+}
+#delete-data {
+  padding: 0.3rem 0.3rem;
+  background-color: red;
+  border: 1px solid black;
+  color: white;
 }

@@ -45,7 +45,7 @@ function displayUserData() {
   let users = JSON.parse(localStorage.getItem("users")) || [];
   let tableBody = document.querySelector("#table tbody");
   let table = document.querySelector("#table ");
-  console.log(tableBody);
+  // console.log(tableBody);
   tableBody.innerHTML = "";
 
   if (users.length > 0) {
@@ -54,27 +54,30 @@ function displayUserData() {
 
   users.forEach(function (user) {
     let row = document.createElement("tr");
-    console.log(table);
+    // console.log(table);
+    let delCell = document.createElement("td");
     let nameCell = document.createElement("td");
     let userCell = document.createElement("td");
     let mailCell = document.createElement("td");
     let phoneCell = document.createElement("td");
     let genderCell = document.createElement("td");
 
-    console.log(user.name);
+    // console.log(user.name);
+    delCell.innerHTML = `<input type="checkbox" class="check">`;
     nameCell.textContent = user.name;
     userCell.textContent = user.user;
     mailCell.textContent = user.mail;
     phoneCell.textContent = user.mobile;
     genderCell.textContent = user.gender;
-    console.log(nameCell);
+    // console.log(nameCell);
 
+    row.appendChild(delCell);
     row.appendChild(nameCell);
     row.appendChild(userCell);
     row.appendChild(mailCell);
     row.appendChild(phoneCell);
     row.appendChild(genderCell);
-    console.log(table);
+    // console.log(table);
     tableBody.appendChild(row);
   });
 }
@@ -207,3 +210,75 @@ function genderCheck() {
     error.style.opacity = "0";
   }
 }
+function searchData() {
+  const filderInput = document.getElementById("search").value;
+  const filters = filderInput.toUpperCase();
+  const table = document.getElementById("table");
+  const tr = table.getElementsByTagName("tr");
+  console.log(table);
+  for (let i = 0; i < tr.length; i++) {
+    const td = tr[i].getElementsByTagName("td")[0];
+    // console.log(td);
+    if (td) {
+      const txtValue = td.textContent;
+      console.log(txtValue.indexOf(filters));
+      if (txtValue.toUpperCase().indexOf(filters) > -1) {
+        tr[i].style.display = "";
+      } else {
+        tr[i].style.display = "none";
+      }
+    }
+  }
+}
+const filterBtn = document.getElementById("searchbtn");
+const deleteBtn = document.getElementById("delete-data");
+
+filterBtn.addEventListener("click", () => {
+  searchData();
+});
+
+function allCheck() {
+  const check = document.getElementById("allCheck");
+  const checkItem = table.getElementsByClassName("check");
+  for (let i = 0; i < checkItem.length; i++) {
+    if (check.checked) {
+      console.log("check");
+      console.log(checkItem[i]);
+      checkItem[i].checked;
+    } else {
+      console.log("unselect");
+    }
+  }
+}
+deleteBtn.addEventListener("click", () => {
+  allCheck();
+  // const tbody = document.getElementById("tbody");
+  // tr = tbody.getElementsByTagName("tr");
+  // console.log(tr);
+  const checkBox = table.getElementsByClassName("check");
+  for (let i = 0; i < checkBox.length; i++) {
+    if (checkBox[i].checked) {
+      console.log(checkBox[i]);
+      table.deleteRow(i + 1);
+    }
+
+    // tr[i].appendChild(td);
+  }
+  // for
+});
+
+// function filterItems(arr, query) {
+//   console.log(arr);
+//   return arr.filter((el) => el.toLowerCase().includes(query.toLowerCase()));
+// }
+// console.log(filterItems(names, "jc"));
+// console.log(filterItems(searchData, "az"));
+// console.log(searchData);
+// console.log(searchInput);
+// }
+// $("#search").on("keyup", function () {
+//   var value = $(this).val().toLowerCase();
+//   $("#table tr").filter(function () {
+//     $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
+//   });
+// });

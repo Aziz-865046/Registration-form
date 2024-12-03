@@ -56,6 +56,7 @@ function displayUserData() {
     let row = document.createElement("tr");
     // console.log(table);
     let delCell = document.createElement("td");
+    let editCell = document.createElement("td");
     let nameCell = document.createElement("td");
     let userCell = document.createElement("td");
     let mailCell = document.createElement("td");
@@ -63,12 +64,14 @@ function displayUserData() {
     let genderCell = document.createElement("td");
 
     // console.log(user.name);
-    delCell.innerHTML = `<input type="checkbox" class="check">`;
+    delCell.innerHTML = `<input type="checkbox" class="rowCheckbox">`;
     nameCell.textContent = user.name;
     userCell.textContent = user.user;
     mailCell.textContent = user.mail;
     phoneCell.textContent = user.mobile;
     genderCell.textContent = user.gender;
+    // editCell.innerHTML = `<button class="edit" onclick=editBtnClick(this)>📝</button>`;
+    editCell.innerHTML = `<button class="edit">📝</button>`;
     // console.log(nameCell);
 
     row.appendChild(delCell);
@@ -77,6 +80,7 @@ function displayUserData() {
     row.appendChild(mailCell);
     row.appendChild(phoneCell);
     row.appendChild(genderCell);
+    row.appendChild(editCell);
     // console.log(table);
     tableBody.appendChild(row);
   });
@@ -155,6 +159,7 @@ submitForm.addEventListener("submit", function (event) {
   if (validInputs()) {
     // registration();
     console.log("hello");
+    submitForm.reset();
     // submitForm.submit();
   } else {
     console.log("------------------error-----------------");
@@ -175,9 +180,9 @@ function validInputs() {
   let allValid = true;
 
   inputs.forEach((input) => {
-    console.log("data : " + input.dataset.regex);
+    // console.log("data : " + input.dataset.regex);
 
-    console.log(testpattern(input.dataset.regex, input.value));
+    // console.log(testpattern(input.dataset.regex, input.value));
     if (input.value.trim() == "") {
       allValid = false;
 
@@ -185,7 +190,7 @@ function validInputs() {
       return false;
     } else if (testpattern(input.dataset.regex, input.value)) {
       allValid = true;
-      console.log("sucess");
+      // console.log("sucess");
       return true;
     } else {
       console.log(input.value);
@@ -237,48 +242,115 @@ filterBtn.addEventListener("click", () => {
   searchData();
 });
 
+const allCheckBtn = document.getElementById("allCheck");
+allCheckBtn.addEventListener("change", () => {
+  allCheck();
+});
 function allCheck() {
-  const check = document.getElementById("allCheck");
-  const checkItem = table.getElementsByClassName("check");
+  const checkItem = table.querySelectorAll(".rowCheckbox");
   for (let i = 0; i < checkItem.length; i++) {
-    if (check.checked) {
-      console.log("check");
-      console.log(checkItem[i]);
-      checkItem[i].checked;
-    } else {
-      console.log("unselect");
+    if (allCheckBtn.checked) {
+      checkItem[i].checked = true;
+    }
+    if (!allCheckBtn.checked) {
+      checkItem[i].checked = false;
     }
   }
+  console.log(checkItem);
+}
+function removeCheckedRows() {
+  const checkboxes = document.querySelectorAll(".rowCheckbox");
+  let users = JSON.parse(localStorage.getItem("users"));
+
+  checkboxes.forEach((checkbox, i) => {
+    if (checkbox.checked) {
+      console.log(i);
+      console.log(users[i]);
+
+      const userFname = users[i].name;
+      const userUsername = users[i].user;
+      const userEmail = users[i].mail;
+      const userPhone = users[i].mobile;
+      const userGender = users[i].gender;
+
+      // users.splice(i, 1);
+      localStorage.removeItem(users[i]);
+      // localStorage.removeItem(users.splice(i, 1));
+      // const userdata = users;
+      // JSON.parse(localStorage.getItem("users")) || [];
+      // users.push(userdata);
+      // // users.push(userData);
+      // localStorage.setItem("users", JSON.stringify(users));
+      // console.log(userdata);
+      const row = checkbox.closest("tr");
+      console.log(users);
+      // localStorage.removeItem(users);
+      // table.deleteRow(row.rowIndex);
+    }
+  });
 }
 deleteBtn.addEventListener("click", () => {
-  allCheck();
-  // const tbody = document.getElementById("tbody");
-  // tr = tbody.getElementsByTagName("tr");
-  // console.log(tr);
-  const checkBox = table.getElementsByClassName("check");
-  for (let i = 0; i < checkBox.length; i++) {
-    if (checkBox[i].checked) {
-      console.log(checkBox[i]);
-      table.deleteRow(i + 1);
-    }
-
-    // tr[i].appendChild(td);
-  }
-  // for
+  console.log("delete cell");
+  removeCheckedRows();
 });
 
-// function filterItems(arr, query) {
-//   console.log(arr);
-//   return arr.filter((el) => el.toLowerCase().includes(query.toLowerCase()));
+const editBtn = document.querySelectorAll(".edit");
+
+editBtn.forEach((btn, i) => {
+  btn.addEventListener("click", () => {
+    editBtnClick(btn, i);
+  });
+});
+
+function editBtnClick(button, ind) {
+  let users = JSON.parse(localStorage.getItem("users"));
+
+  console.log(users[ind]);
+  const userFname = users[ind].name;
+  const userUsername = users[ind].user;
+  const userEmail = users[ind].mail;
+  const userPhone = users[ind].mobile;
+  const userGender = users[ind].gender;
+
+  console.log(userFname, userUsername, userEmail, userPhone, userGender);
+
+  // console.log(tablefName, tableUsername, tableEmail, tablePhone, tableGender);
+
+  fname.value = userFname;
+  userName.value = userUsername;
+  email.value = userEmail;
+  phone.value = userPhone;
+  gender.value = userGender;
+}
+// function saveEdit() {
+//   // Get the data from the form
+//   const name = document.getElementById("name").value;
+//   const age = document.getElementById("age").value;
+
+//   // Update the table row with the new data
+//   currentRow.cells[0].innerText = name;
+//   currentRow.cells[1].innerText = age;
+
+//   // Hide the form
+//   document.getElementById("editForm").style.display = "none";
 // }
-// console.log(filterItems(names, "jc"));
-// console.log(filterItems(searchData, "az"));
-// console.log(searchData);
-// console.log(searchInput);
-// }
-// $("#search").on("keyup", function () {
-//   var value = $(this).val().toLowerCase();
-//   $("#table tr").filter(function () {
-//     $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
-//   });
-// });
+// Retrieve the user data from local storage
+
+//////////////////////////////////////////////////////////////////
+let users = JSON.parse(localStorage.getItem("users"));
+
+// Check if the users array exists
+if (users) {
+  // Index of the user you want to delete (assuming 'mushrat' is at index 2)
+  let indexToRemove = users.findIndex((user) => user.user === "musharat123");
+
+  // Remove the user from the array
+  if (indexToRemove > -1) {
+    users.splice(indexToRemove, 1);
+  }
+
+  // Update the local storage with the modified array
+  localStorage.setItem("users", JSON.stringify(users));
+}
+
+console.log(users);

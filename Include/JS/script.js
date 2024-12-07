@@ -16,7 +16,8 @@ let userName = document.getElementById("username");
 let email = document.getElementById("email");
 let phone = document.getElementById("phone");
 let genderItem = document.getElementsByClassName("genderitem");
-let gender = submitForm.elements["gender"];
+let gender = submitForm.elements["gender"].value;
+console.log(gender);
 
 function saveData() {
   let fname = document.getElementById("name").value;
@@ -264,28 +265,17 @@ function removeCheckedRows() {
 
   checkboxes.forEach((checkbox, i) => {
     if (checkbox.checked) {
-      console.log(i);
-      console.log(users[i]);
+      let indexToRemove = users.findIndex(
+        (user) => user.name === users[i].name
+      );
+      if (indexToRemove > -1) {
+        users.splice(indexToRemove, 1);
+      }
 
-      const userFname = users[i].name;
-      const userUsername = users[i].user;
-      const userEmail = users[i].mail;
-      const userPhone = users[i].mobile;
-      const userGender = users[i].gender;
-
-      // users.splice(i, 1);
-      localStorage.removeItem(users[i]);
-      // localStorage.removeItem(users.splice(i, 1));
-      // const userdata = users;
-      // JSON.parse(localStorage.getItem("users")) || [];
-      // users.push(userdata);
-      // // users.push(userData);
-      // localStorage.setItem("users", JSON.stringify(users));
-      // console.log(userdata);
-      const row = checkbox.closest("tr");
+      localStorage.setItem("users", JSON.stringify(users));
+      console.log("user");
       console.log(users);
-      // localStorage.removeItem(users);
-      // table.deleteRow(row.rowIndex);
+      displayUserData();
     }
   });
 }
@@ -298,6 +288,7 @@ const editBtn = document.querySelectorAll(".edit");
 
 editBtn.forEach((btn, i) => {
   btn.addEventListener("click", () => {
+    // console.log(btn);
     editBtnClick(btn, i);
   });
 });
@@ -312,6 +303,9 @@ function editBtnClick(button, ind) {
   const userPhone = users[ind].mobile;
   const userGender = users[ind].gender;
 
+  // const userPass = users[ind].password;
+  // const conPass = users[ind].cnfrpassword;
+
   console.log(userFname, userUsername, userEmail, userPhone, userGender);
 
   // console.log(tablefName, tableUsername, tableEmail, tablePhone, tableGender);
@@ -320,7 +314,9 @@ function editBtnClick(button, ind) {
   userName.value = userUsername;
   email.value = userEmail;
   phone.value = userPhone;
-  gender.value = userGender;
+  gender = userGender;
+  console.log(gender);
+  console.log(userGender);
 }
 // function saveEdit() {
 //   // Get the data from the form

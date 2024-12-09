@@ -17,7 +17,6 @@ let email = document.getElementById("email");
 let phone = document.getElementById("phone");
 let genderItem = document.getElementsByClassName("genderitem");
 let gender = submitForm.elements["gender"].value;
-console.log(gender);
 
 function saveData() {
   let fname = document.getElementById("name").value;
@@ -154,12 +153,14 @@ function registration() {
 
 submitForm.addEventListener("submit", function (event) {
   event.preventDefault();
-  console.log("click submit btn");
+  // console.log("click submit btn");
   genderCheck();
-  saveData();
   if (validInputs()) {
+    updateDataOnLocalStorage();
     // registration();
-    console.log("hello");
+    // saveData();
+    // updateData();
+    // console.log("hello");
     submitForm.reset();
     // submitForm.submit();
   } else {
@@ -187,7 +188,7 @@ function validInputs() {
     if (input.value.trim() == "") {
       allValid = false;
 
-      console.log("error");
+      // console.log("error");
       return false;
     } else if (testpattern(input.dataset.regex, input.value)) {
       allValid = true;
@@ -196,12 +197,12 @@ function validInputs() {
     } else {
       console.log(input.value);
       allValid = false;
-      console.log("return errors");
+      // console.log("return errors");
       return false;
     }
   });
   if (allValid) {
-    console.log("sumbim form");
+    // console.log("sumbim form");
     return true;
   }
 }
@@ -290,11 +291,113 @@ editBtn.forEach((btn, i) => {
   btn.addEventListener("click", () => {
     // console.log(btn);
     editBtnClick(btn, i);
+    console.log(i);
   });
 });
 
+function updateDataOnLocalStorage(ind) {
+  let users = JSON.parse(localStorage.getItem("users"));
+  users[ind];
+  console.log("upadata data");
+  console.log(users[ind]);
+
+  let fname = document.getElementById("name").value;
+  let userName = document.getElementById("username").value;
+  let email = document.getElementById("email").value;
+  let phone = document.getElementById("phone").value;
+  let genders = submitForm.elements["gender"].value;
+  console.log(fname, userName, email, phone, genders);
+  newUser = {
+    name: fname,
+    user: userName,
+    mail: email,
+    mobile: phone,
+    gender: genders,
+  };
+  console.log("newUser");
+  console.log(newUser);
+
+  if ((newUser = users[ind])) {
+    console.log("same");
+  }
+
+  /////////
+  // let existing = localStorage.getItem("myObject");
+  // let obj = users[ind] ? JSON.parse(users[ind]) : {};
+  // console.log(obj);
+  // obj.newKey = "newValue";
+  // localStorage.setItem("myObject", JSON.stringify(obj));
+}
+function updateData() {
+  console.log("Update Data");
+  let users = JSON.parse(localStorage.getItem("users"));
+
+  if (!localStorage.length == 0) {
+    console.log("local");
+    users.forEach((user) => {
+      let allValid = false;
+      console.log(allValid);
+      console.log(user);
+      if (true) {
+        if (user.name === fname.value) {
+          console.log("same name");
+          // allValid = false;
+          return true;
+        }
+        if (user.user === userName.value) {
+          console.log("same username");
+          // allValid = false;
+          return true;
+        }
+        if (user.mail === email.value) {
+          console.log("same email");
+          // allValid = false;
+          return true;
+        }
+        if (user.mobile === phone.value) {
+          console.log("same phone");
+          // allValid = false;
+          return true;
+        }
+        if (user.gender === submitForm.elements["gender"].value) {
+          console.log("same gender");
+          // allValid = false;
+          return true;
+        }
+        return (allValid = true);
+      }
+      console.log(allValid);
+      if (allValid) {
+        console.log(allValid);
+        console.log("all filed same");
+      } else {
+        console.log("not same");
+      }
+    });
+
+    // console.log(allValid);
+  }
+  console.log(users);
+
+  // if (checkbox.checked) {
+  //   let indexToRemove = users.findIndex(
+  //     (user) => user.name === users[i].name
+  //   );
+  //   if (indexToRemove > -1) {
+  //     users.splice(indexToRemove, 1);
+  //   }
+
+  //   localStorage.setItem("users", JSON.stringify(users));
+  //   console.log("user");
+  //   console.log(users);
+  //   displayUserData();
+  // }
+}
+
 function editBtnClick(button, ind) {
   let users = JSON.parse(localStorage.getItem("users"));
+
+  updateDataOnLocalStorage(ind);
 
   console.log(users[ind]);
   const userFname = users[ind].name;
@@ -333,20 +436,20 @@ function editBtnClick(button, ind) {
 // Retrieve the user data from local storage
 
 //////////////////////////////////////////////////////////////////
-let users = JSON.parse(localStorage.getItem("users"));
+// let users = JSON.parse(localStorage.getItem("users"));
 
-// Check if the users array exists
-if (users) {
-  // Index of the user you want to delete (assuming 'mushrat' is at index 2)
-  let indexToRemove = users.findIndex((user) => user.user === "musharat123");
+// // Check if the users array exists
+// if (users) {
+//   // Index of the user you want to delete (assuming 'mushrat' is at index 2)
+//   let indexToRemove = users.findIndex((user) => user.user === "musharat123");
 
-  // Remove the user from the array
-  if (indexToRemove > -1) {
-    users.splice(indexToRemove, 1);
-  }
+//   // Remove the user from the array
+//   if (indexToRemove > -1) {
+//     users.splice(indexToRemove, 1);
+//   }
 
-  // Update the local storage with the modified array
-  localStorage.setItem("users", JSON.stringify(users));
-}
+//   // Update the local storage with the modified array
+//   localStorage.setItem("users", JSON.stringify(users));
+// }
 
-console.log(users);
+// console.log(users);
